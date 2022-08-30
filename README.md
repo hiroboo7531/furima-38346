@@ -15,7 +15,7 @@
 | Column                    | Type     | Options     |
 | -------------------       | ------   | ----------- |
 | nick_name                 | string   | null: false |
-| email                     | string   | null: false, UniQue: true|
+| email                     | string   | null: false, UniQue_true|
 | encrypted_password        | string   | null: false |
 | first_name                | string   | null: false  |
 | family_name               | string   | null: false |
@@ -60,7 +60,7 @@ integer型でカラムを作成すると管理しやすくなります。 -->
 
 ### Association
 
-- belongs to :user
+- belongs_to :user
 - has_one    :purchase
 
 
