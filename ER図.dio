@@ -13,7 +13,7 @@
                 <mxCell id="8" value="purchases" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" vertex="1" parent="1">
                     <mxGeometry x="450" y="100" width="260" height="290" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="                  (credit card&#10;                  (period-month&#10;                  (period-year&#10;                  (secure-cord&#10;user_id&#10;item_id&#10;send_info_id&#10;&#10;" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="8">
+                <mxCell id="9" value="                  (credit card&#10;                  (period-month&#10;                  (period-year&#10;                  (secure-cord&#10;user_id&#10;item_id&#10;" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="8">
                     <mxGeometry y="26" width="260" height="264" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=ERoneToMany;endFill=0;" edge="1" parent="1">

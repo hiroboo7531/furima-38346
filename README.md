@@ -77,7 +77,6 @@ integer型でカラムを作成すると管理しやすくなります。 -->
 
 | item              | references   | null: false, foreign_key: true |
 | user              | references   | null: false, foreign_key: true |
-| send_info       | references   | null: false, foreign_key: true |
 
 
 ### Association
@@ -96,6 +95,7 @@ integer型でカラムを作成すると管理しやすくなります。 -->
 | house_number      | string   | null: false |
 | building_name     | string   | 
 | phone             | string  | null: false |
+| purchase          | references   | null: false, foreign_key: true |
 <!-- phoneをintegerでやると先頭に０をつけた場合読み取られない -->
 
 ### Association
