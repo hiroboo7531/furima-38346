@@ -8,8 +8,10 @@
     <%= form_with local: true do |f| %>
 
     <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-    <%# render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/error_messages', model: f.object %>
     <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+    <%# model:〇〇がインスタンス変数、リンク先へ情報を持っていってくれる、ということは向こうでインスタンス変数を使わないと情報読まれないよ 
+       f.objectっていうのはfっていうform_withのブロック変数にobjectってメソッドを入れてるの。%>
 
     <%# 商品画像 %>
     <div class="img-upload">
