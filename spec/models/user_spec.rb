@@ -39,20 +39,17 @@ RSpec.describe User, type: :model do
     it'メールアドレスに@を含まない場合は登録できない' do
      @user.email = 'aaaaaa'  
      @user.valid?
-    #  binding.pry
      expect(@user.errors.full_messages).to include("Email is invalid")
     end
     it'パスワードが空では登録できない' do
       @user.password = ''  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
     it 'パスワードが6文字未満では登録できない' do
       @user.password = 'aaa1'  
       @user.password_confirmation = 'aaa1'
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
 
@@ -60,7 +57,6 @@ RSpec.describe User, type: :model do
       @user.password = 'aaaaaaa'  
       @user.password_confirmation = 'aaaaaaa'
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Password は半角英数を両方含む必要があります")
     end
 
@@ -68,78 +64,66 @@ RSpec.describe User, type: :model do
       @user.password = '1111111'  
       @user.password_confirmation = '1111111'
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Password は半角英数を両方含む必要があります")
     end
     it '全角文字を含むパスワードでは登録できない' do
       @user.password = '111111あ'  
       @user.password_confirmation = '111111あ'
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Password は半角英数を両方含む必要があります")
     end
     it 'パスワードとパスワード（確認用）が不一致だと登録できない' do
       @user.password = '1111111a'  
       @user.password_confirmation = '111111aa'
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
     it '姓（全角）が空だと登録できない' do
       @user.family_name = ''  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Family name can't be blank")
     end
     it '姓（全角）に半角文字が含まれていると登録できない' do
       @user.family_name = 'aaa'  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Family name 全角文字を使用してください")
     end
     it '名（全角）が空だと登録できない' do
       @user.first_name = ''  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("First name can't be blank")
     end
     it '名（全角）に半角文字が含まれていると登録できない' do
       @user.first_name = 'aaa'  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("First name 全角文字を使用してください")
     end
     it '姓（カナ）が空だと登録できない' do
       @user.family_name2 = ''  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Family name2 can't be blank")
     end
     it '姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
       @user.family_name2 = 'あああ一５'  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Family name2 に全角カタカナを使用してください")
     end
     it '名（カナ）が空だと登録できない' do
       @user.first_name2 = ''  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("First name2 can't be blank")
     end
     it '名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
       @user.first_name2 = 'aaaあああ'  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("First name2 に全角カタカナを使用してください")
     end
     it '生年月日が空だと登録できない' do
       @user.birth_day = ''  
       @user.valid?
-      # binding.pry
       expect(@user.errors.full_messages).to include("Birth day can't be blank")
     end
-    
+    # テストコードのbinding.pryのコメントアウトは消すように
     # bundle exec rspec spec/models/user_spec.rb
 
  # includeの後にスペースは開けないこと
