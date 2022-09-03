@@ -182,9 +182,20 @@
   </div>
   <%# /商品一覧 %>
 </div>
+
 <%= link_to("/items/new", class: 'purchase-btn') do %>
+ 
  <%# new_item_path     link_toの後はこのpathでもいける %>
+  
   <span class='purchase-btn-text'>出品する</span>
+  <%# <% if user_signed_in? %> 
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+  <%# <%else%> 
+  <%# ここではログインしている時に表示するかしないか程度の条件指定はできるがビューファイルは表示するだけなのでredirectみたいなのは無理
+  ここのリンクをユーザーが押した時のリクエストに乗るものに条件分岐をかけないと %>
+  <%# <%redirect_to root_path%> 
+ 
+  <%# <%end%> 
+  
 <% end %>
 <%= render "shared/footer" %>
