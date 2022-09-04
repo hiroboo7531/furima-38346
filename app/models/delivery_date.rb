@@ -1,8 +1,6 @@
 class DeliveryDate < ActiveHash::Base
   # モデルクラス名にハイフンを入れることはできない
-  # 例で挙げるとモデル名は上も下も同じ意味になる、だがモデルクラス名はアンダーバーを使えないので使わないように変換してあげる必要がある
-  # rails g model ModelSchedule  user_id:integer schedule:text
-  # rails g model model_schedule  user_id:integer schedule:text
+  # 例で挙げるとモデル名は上も下も同じ意味になる、だがモデルクラス名はアンダーバーを使えないので使わないように変換してあげる必要があるrails g model ModelSchedule  user_id:integer schedule:text＝ rails g model model_schedule  user_id:integer schedule:text
   self.data = [
     
     { id: 1, name: '---' },

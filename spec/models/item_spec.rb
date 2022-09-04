@@ -103,6 +103,12 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Price is not a number"
       end
+      
+      it 'userが紐づいていないと登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "User must exist"
+      end
 # bundle exec rspec spec/models/item_spec.rb
     end
   end

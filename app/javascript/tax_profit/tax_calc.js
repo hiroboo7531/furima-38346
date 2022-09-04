@@ -8,22 +8,18 @@ window.addEventListener('load', () => {
   console.log(priceInput)
    priceInput.addEventListener("input", () => {
     // 金額を入力するたびに、イベント発火するようにaddEventListenerを使用するよ
-    // 入力があるたびにイベント発火を起こしたいため、以下のようにinputというイベントを使用するよ。
-    // console.log("イベント発火")
-   
-    // const inputValue = priceInput.value;
-    // console.log(inputValue);
+    // 入力があるたびにイベント発火を起こしたいため、右のようにinputというイベントを使用するよ。画面で確認してみて、右がコードを打つ際の段取り console.log("イベント発火")改行 const inputValue = priceInput.value;改行 console.log(inputValue);
     // 続いて、商品出品ページで金額を入力し、コンソール上に金額が表示されるか確認。
 
 // innerHTMLを使用して、販売手数料や利益計算結果を表示できるように innerHTMLは、HTML要素の書き換えを行うことができるよ。
      const addTaxDom = document.getElementById("add-tax-price");
 //      console.log(priceInput.innerHTML);
-     addTaxDom.innerHTML = Math.round(priceInput.value * 0.1 );
+     addTaxDom.innerHTML = Math.floor(priceInput.value * 0.1 );
     //  Math.round("入力した金額をもとに販売手数料を計算する処理")
      const addPofitDom = document.getElementById("profit");
 //      console.log(priceInput.innerHTML);
-     addPofitDom.innerHTML = Math.round(priceInput.value - Math.round(priceInput.value * 0.1 ))
-//        販売手数料や利益計算の処理は、Math.floorメソッドを用いて実装
+     addPofitDom.innerHTML = Math.floor(priceInput.value - Math.floor(priceInput.value * 0.1 ))
+//        販売手数料や利益計算の処理は、Math.floorメソッドを用いて実装、floorをroundだと四捨五入、ceilだと切り上げ
  })
 });
 

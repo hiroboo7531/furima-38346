@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  def index
-    @items = Item.all
-  end
+  # def index
+  #   @items = Item.all
+  # end
 
   def new
     if user_signed_in? 
