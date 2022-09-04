@@ -1,29 +1,109 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  必要な情報を適切に入力して「出品する」ボタンを押すと、商品情報がデータベースに保存されること。
-  ログイン状態の場合のみ、商品出品ページへ遷移できること。
-  ログアウト状態の場合は、商品出品ページへ遷移しようとすると、ログインページへ遷移すること。
-  商品画像を1枚つけることが必須であること。
-  商品名が必須であること。
-  商品の説明が必須であること。
-  カテゴリーの情報が必須であること。
-  カテゴリーは、「---、メンズ、レディース、ベビー・キッズ、インテリア・住まい・小物、本・音楽・ゲーム、おもちゃ・ホビー・グッズ、家電・スマホ・カメラ、スポーツ・レジャー、ハンドメイド、その他」の11項目が表示されること（--- は初期値として設定すること）。
-  商品の状態の情報が必須であること。
-  商品の状態は、「---、新品・未使用、未使用に近い、目立った傷や汚れなし、やや傷や汚れあり、傷や汚れあり、全体的に状態が悪い」の7項目が表示されること（--- は初期値として設定すること）。
-  配送料の負担の情報が必須であること。
-  配送料の負担は、「---、着払い(購入者負担)、送料込み(出品者負担)」の3項目が表示されること（--- は初期値として設定すること）。
-  発送元の地域の情報が必須であること。
-  発送元の地域は、「---」と47都道府県の合計48項目が表示されること（--- は初期値として設定すること）。
-  発送までの日数の情報が必須であること。
-  発送までの日数は、「---、1~2日で発送、2~3日で発送、4~7日で発送」の4項目が表示されること（--- は初期値として設定すること）。
-  価格の情報が必須であること。
-  価格は、¥300~¥9,999,999の間のみ保存可能であること。
-  価格は半角数値のみ保存可能であること。
-  入力された価格によって、販売手数料や販売利益の表示が変わること。
-  販売手数料と販売利益は、小数点以下を切り捨てて表示すること。
-  出品が完了したら、トップページに遷移すること。
-  エラーハンドリングができること（入力に問題がある状態で「出品する」ボタンが押された場合、情報は保存されず、出品ページに戻りエラーメッセージが表示されること）。
-  エラーハンドリングによって出品ページに戻った場合でも、入力済みの項目（商品画像・販売手数料・販売利益以外）は消えないこと。
-  エラーハンドリングの際、重複したエラーメッセージが表示されないこと。
+  before do
+    @item = FactoryBot.build(:item)
+  end
+
+  describe "出品機能" do
+    context 'できる時' do
+      it '必要な情報を適切に入力して「出品する」ボタンを押すと、商品情報がデータベースに保存されること。' do
+        expect(@item).to be_valid
+        # 実行結果が緑色で表示されていれば成功
+      end
+  
+    end
+    context 'できない時' do
+      it '商品画像を１枚もないとできない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Image can't be blank"
+      end
+
+      it '商品名がないとできない' do
+        @item.item_name = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Item name can't be blank"
+      end
+    
+      it '商品名が41文字以上だとできない' do
+        @item.item_name = 'a' * 41
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Item name is too long (maximum is 40 characters)"
+      end
+
+      it '商品の説明がないとできない' do
+        @item.explanation = '' 
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Explanation can't be blank"
+      end
+
+      it '商品の説明が1001文字だとできない' do
+        @item.explanation = 'あ' * 1001
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Explanation is too long (maximum is 1000 characters)"
+      end
+
+      it 'カテゴリーの情報が---だとできない' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Category can't be blank"
+      end
+
+      it '商品の状態が---だとできない' do
+        @item.condition_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Condition can't be blank"
+      end
+
+      it '配送料の負担が---だとできない' do
+        @item.send_fee_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Send fee can't be blank"
+      end
+
+      it '発送元の地域が---だとできない' do
+        @item.prefecture_id = '0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Prefecture can't be blank"
+      end
+
+      it '発送までの日数の情報が---だとできない' do
+        @item.delivery_date_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Delivery date can't be blank"
+      end
+
+      it '価格の情報がないとできない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price can't be blank"
+      end
+      
+      it '価格の情報が299だとできない' do
+        @item.price = '299'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price must be greater than or equal to 300"
+      end
+
+      it '価格の情報が10,000,000だとできない' do
+        @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price must be less than or equal to 9999999"
+      end
+
+      it '価格の情報が全角だとできない' do
+        @item.price = 'あああ'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price is not a number"
+      end
+
+      it '価格の情報が数字以外だとできない' do
+        @item.price = 'aaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price is not a number"
+      end
+# bundle exec rspec spec/models/item_spec.rb
+    end
+  end
 end
