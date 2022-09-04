@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# rails g rspec:model userこれを使ってテストファイルは作成
 RSpec.describe User, type: :model do
   
   before do
