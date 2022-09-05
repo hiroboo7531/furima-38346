@@ -129,24 +129,30 @@
     <ul class='item-lists'>
 
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+      <% @items.each do |item| %>
       <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
-          <%= image_tag "item-sample.png", class: "item-img" %>
+          <%= image_tag item.image, class: "item-img" %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
-          <div class='sold-out'>
+          <%# <% if item.purchase.present %> 
+          <%# アソシエーションを組んでいるからできること %>
+          <%# 購入機能実装時コメントアウト解除 %>
+          <%# <div class='sold-out'>
             <span>Sold Out!!</span>
-          </div>
+          </div> %>
+          <%# <% end %> 
           <%# //商品が売れていればsold outを表示しましょう %>
 
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
-            <%= "商品名" %>
+            <%= item.item_name %>
           </h3>
           <div class='item-price'>
-            <span><%= "販売価格" %>円<br><%= '配送料負担' %></span>
+            <span><%= item.price %>円<br><%= item.send_fee.name %></span>
+            <%# active hashなら、アソシエーションくんでるモデルのカラムを持ってこないと！！！ %>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>
@@ -154,11 +160,15 @@
           </div>
         </div>
         <% end %>
+      <% end %>
       </li>
       <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
 
       <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
       <%# 商品がある場合は表示されないようにしましょう %>
+      <%# <% if @items[0] この条件文は@itemsのデータベースの０＝１番目のデータを指定としか言ってない。データが空であるとは言ってないよ%>  
+      <% if @items[0] == nil %>
+      <%# イコールは二つ使う！！！ %>
       <li class='list'>
         <%= link_to '#' do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -176,6 +186,7 @@
         </div>
         <% end %>
       </li>
+      <% end %>
       <%# //商品がある場合は表示されないようにしましょう %>
       <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
     </ul>
@@ -192,7 +203,7 @@
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
   <%# <%else%> 
   <%# ここではログインしている時に表示するかしないか程度の条件指定はできるがビューファイルは表示するだけなのでredirectみたいなのは無理
-  ここのリンクをユーザーが押した時のリクエストに乗るものに条件分岐をかけないと %>
+  ここのリンクをユーザーが押した時のリクエストに乗るものに条件分岐をかけないと＝コントローラー %>
   <%# <%redirect_to root_path%> 
  
   <%# <%end%> 
