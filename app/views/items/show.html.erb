@@ -27,10 +27,10 @@
       </span>
     </div>
 
-   <%# 購入されたものは編集、削除、購入画面に進むのボタンも消す %>
+
     <% if user_signed_in? && current_user.id == @item.user_id %>
-    <%# ifとelseで分けてるよ %>
-        <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
+   
+        <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
     <% elsif user_signed_in? %>
@@ -39,10 +39,9 @@
        <%# <% if @item.purchase.present %> 
           <%# アソシエーションを組んでいるからできること %>
           <%# 購入機能実装時コメントアウト解除 %>
-          <%# ログインしていなかったらログイン画面に進むように！！！ ==＞elsifでボタン出さないようにしたので大丈夫 %>
        <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
        <%# <% end %> 
-       <%# //商品が売れていない場合はこちらを表示しましょう %>
+       
 
     <% end %>
     

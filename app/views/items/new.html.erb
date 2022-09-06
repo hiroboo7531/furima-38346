@@ -7,11 +7,10 @@
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item , local: true do |f| %>
 
-    <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+    
     <%= render 'shared/error_messages', model: f.object %>
-    <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-    <%# model:〇〇の〇〇がインスタンス、リンク先へ情報を持っていってくれる、ということは向こうでインスタンス変数を使わないと情報読まれないよ 
-       f.objectっていうのはfっていうform_withのブロック変数にobjectってメソッドを入れてるの。%>
+   
+    
 
     <%# 商品画像 %>
     <div class="img-upload">
@@ -53,11 +52,6 @@
           <span class="indispensable">必須</span>
         </div>
         <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
-        <%# collection_select(オブジェクト名, メソッド名, 要素の配列, value属性の項目, テキストの項目, オプション={}, HTML属性={} or イベント属性={}) %>
-        <%# f.collection_select(メソッド名, 要素の配列, value属性の項目, テキストの項目, オプション={}, HTML属性={} or イベント属性={}) %>
-        <%# イベント属性  Javascriptを適用したときの発火材料 %>
-        <%# <%= form.collection_select(保存されるカラム名, オブジェクトの配列, カラムに保存される項目, 選択肢に表示されるカラム名, オプション, htmlオプション) %> 
-        <%# 保存されるカラム=このフォームが保存されるDB  オブフェクトの配列＝モデルの中身を持ってくる(多分) 絡むに保存されるカラム項目、選択肢に＝active hashで作ったモデルを見にいって %>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
