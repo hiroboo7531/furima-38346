@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
 
   before_action :correct_signin_user, only: [:edit , :update]
-  # 出品者以外のログイン者がURLをいじって商品編集ページに飛べないようにするよ
-  # , :destroy, :update]
+  before_action :repeat_code,only: [:show ,:edit , :update]
+  
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -26,14 +26,14 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id])
   end
   def update
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(@item)
       
@@ -51,6 +51,11 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:item_name,:explanation,:category_id,:condition_id,:send_fee_id,:prefecture_id,:delivery_date_id,:price, :image).merge(user_id: current_user.id)
   end
+
+  def repeat_code
+    @item = Item.find(params[:id])
+  end
+
 
   def correct_signin_user
     if user_signed_in? 
