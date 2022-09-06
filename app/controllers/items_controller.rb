@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :repeat_code,only: [:show ,:edit , :update]
+  before_action :authenticate_user!,only: [:new , :edit , :update]
   before_action :correct_signin_user, only: [:edit , :update]
  
   
@@ -9,11 +10,12 @@ class ItemsController < ApplicationController
   end
 
   def new
-    if user_signed_in? 
+    # 復習のため  authenticate_user!を適用することで4行が省略出来た！
+    # if user_signed_in? 
     @item = Item.new
-    else
-    redirect_to new_user_session_path
-    end
+    # else
+    # redirect_to new_user_session_path
+    # end
   end
 
   def create
@@ -56,10 +58,11 @@ class ItemsController < ApplicationController
 
 
   def correct_signin_user
-    if user_signed_in? 
+    # 復習のため  authenticate_user!を適用することで4行が省略出来た！
+    # if user_signed_in? 
     redirect_to root_path unless current_user == @item.user
-    else
-    redirect_to new_user_session_path
-    end
+    # else
+    # redirect_to new_user_session_path
+    # end
   end
 end
