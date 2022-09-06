@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :repeat_code,only: [:show ,:edit , :update]
-  before_action :authenticate_user!,only: [:new , :edit , :update]
+  before_action :authenticate_user!,only: [:new , :edit , :update ,:delete]
   before_action :correct_signin_user, only: [:edit , :update , :delete]
  
   
