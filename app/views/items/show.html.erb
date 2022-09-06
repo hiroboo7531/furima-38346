@@ -30,7 +30,8 @@
    <%# 購入されたものは編集、削除、購入画面に進むのボタンも消す %>
     <% if user_signed_in? && current_user.id == @item.user_id %>
     <%# ifとelseで分けてるよ %>
-        <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
+    <%# ログイン状態の場合でも、自身が出品した売却済み商品の商品情報編集ページへ遷移しようとすると、トップページに遷移すること。 %>
+        <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
     <% elsif user_signed_in? %>
