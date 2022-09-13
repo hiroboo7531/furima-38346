@@ -2,6 +2,9 @@ class ItemsController < ApplicationController
   before_action :repeat_code,only: [:show ,:edit , :update]
   before_action :authenticate_user!,only: [:new , :edit , :update ,:destroy]
   before_action :correct_signin_user, only: [:edit , :update , :destroy]
+  before_action :already_pay, only: [:edit , :update , :destroy]
+ 
+ 
  
   
 
@@ -19,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    
     @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
@@ -56,6 +60,7 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:item_name,:explanation,:category_id,:condition_id,:send_fee_id,:prefecture_id,:delivery_date_id,:price, :image).merge(user_id: current_user.id)
+  
   end
 
   def repeat_code
@@ -71,4 +76,12 @@ class ItemsController < ApplicationController
     # redirect_to new_user_session_path
     # end
   end
+
+  def already_pay
+    @item = Item.find(params[:id])
+    redirect_to root_path if  @item.order.present?
+    # 読み方  correct_signin_userユーザーの正誤は確かめられてる  かつ オーダーテーブルに存在するならredirect
+  end
+
+  
 end

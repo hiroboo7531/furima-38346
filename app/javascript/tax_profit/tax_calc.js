@@ -5,7 +5,7 @@
 window.addEventListener('load', () => {
   const priceInput = document.getElementById("item-price");
   // const 変数名 = 変数に入れる値;
-  console.log(priceInput)
+//   console.log(priceInput)
    priceInput.addEventListener("input", () => {
     // 金額を入力するたびに、イベント発火するようにaddEventListenerを使用するよ
     // 入力があるたびにイベント発火を起こしたいため、右のようにinputというイベントを使用するよ。画面で確認してみて、右がコードを打つ際の段取り console.log("イベント発火")改行 const inputValue = priceInput.value;改行 console.log(inputValue);
