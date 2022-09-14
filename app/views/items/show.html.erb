@@ -9,13 +9,12 @@
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
 
-      <%# <% if @item.purchase.present %> 
-          <%# アソシエーションを組んでいるからできること %>
-          <%# 購入機能実装時コメントアウト解除 %>
-      <%# <div class="sold-out">
+      <% if @item.order != nil %>
+      <%# != はa と b が等しくない  @item.order.present?も見てみて%>
+      <div class='sold-out'>
         <span>Sold Out!!</span>
-      </div> %>
-      <%# <% end %> 
+      </div>
+      <% end %> 
       
     </div>
     <div class="item-price-box">
@@ -27,22 +26,23 @@
       </span>
     </div>
 
+    <% if user_signed_in? && current_user.id == @item.user_id && @item.order.present? %>
 
-    <% if user_signed_in? && current_user.id == @item.user_id %>
+    <% elsif user_signed_in? && current_user.id == @item.user_id %>
    
-        <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
+        <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
-        <%= link_to "削除", item_path, method: :delete, class:"item-destroy" %>
+        <%= link_to "削除", item_path(@item), method: :delete, class:"item-destroy" %>
+
+    <% elsif user_signed_in? && @item.order.present? %>
+       <%= link_to "トップページに戻る", root_path ,class:"item-red-btn"%>
+
+     
     <% elsif user_signed_in? %>
-
-       <%# 商品が売れていない場合はこちらを表示しましょう %>
-       <%# <% if @item.purchase.present %> 
-          <%# アソシエーションを組んでいるからできること %>
-          <%# 購入機能実装時コメントアウト解除 %>
-       <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-       <%# <% end %> 
-       
-
+       <%= link_to "購入画面に進む", item_orders_path(@item) ,class:"item-red-btn"%>
+    <% else %>
+      <%# 注意、ここに空のelseを置かないと未ログイン者が購入ボタンを押しサインイン画面に飛んでログインした後、
+      購入済みの商品でも購入画面に行けてしまう。なので未ログイン者にはボタンごと消す %>
     <% end %>
     
 

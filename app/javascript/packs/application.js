@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 require ('tax_profit/tax_calc')
+require("../card")
 // アプリ用に作成したjsを先ほど説明したapplication.jsに参照を追加する事でコンパイル対象にする。
 // app/javascript以下の任意のディレクトリもしくは直下にjsを作成する。(packs以下に作らない事。)
 // ここから
