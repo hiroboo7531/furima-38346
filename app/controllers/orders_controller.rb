@@ -8,13 +8,14 @@ class OrdersController < ApplicationController
 
 
   def index
-    @item = Item.find(params[:item_id])
+    # @item = Item.find(params[:item_id])  復習用 まとめよう、already_payでまとめられてる
     @order_send_info = OrderSendInfo.new
     
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    # @item = Item.find(params[:item_id]) 復習用 まとめよう、already_payでまとめられてる、
+    # 別の引数でインスタンス変数設定だけのbefore_actionを作ることもできる
     # binding.pry、を押してターミナルでparams入力して送られている内容を確認
     @order_send_info = OrderSendInfo.new(order_params)
     # .newはインタンス変数を生成するための
@@ -28,6 +29,9 @@ class OrdersController < ApplicationController
         end
   end
   private
+    def find_repeat
+      @item = Item.find(params[:item_id])
+    end
 
     def order_params
       # この時点では、order_idが不要。またrequire外の情報は参照するため、mergeとする。

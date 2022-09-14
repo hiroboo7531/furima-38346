@@ -26,11 +26,12 @@ const pay = () => {
       exp_month: formData.get("order_send_info[exp_month]"),
       exp_year: `20${formData.get("order_send_info[exp_year]")}`,
       cvc: formData.get("order_send_info[cvc]"),
-    }; // フォーム情報はコンソールで確認
+    }; // フォーム情報はコンソールで確認   後で復習、手順を見返すようの記述
 
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
         const token = response.id;
+//後で復習、手順を見返すようのデバッグ 
 //         console.log(token)
 //       }
 //     });
@@ -41,7 +42,7 @@ const pay = () => {
         const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} name='token' type="hidden"> `;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
-        // debugger;
+        // debugger;    後で復習、手順を見返すようのデバッグ 
       }
 
       document.getElementById("card-number").removeAttribute("name");

@@ -54,17 +54,17 @@ RSpec.describe OrderSendInfo, type: :model do
         @order_send_info.valid?
         expect(@order_send_info.errors.full_messages).to include("Phone can't be blank")
       end
-      it 'post_numerはハイフンがないと保存できない' do
+      it 'post_numberはハイフンがないと保存できない' do
         @order_send_info.post_number = '1234567'
         @order_send_info.valid?
         expect(@order_send_info.errors.full_messages).to include("Post number is invalid. Include hyphen(-)")
       end
-      it 'post_numerは半角英数混合では保存できない' do
+      it 'post_numberは半角英数混合では保存できない' do
         @order_send_info.post_number = '123-abcd'
         @order_send_info.valid?
         expect(@order_send_info.errors.full_messages).to include("Post number is invalid. Include hyphen(-)")
       end
-      it 'post_numerは全角では保存できない' do
+      it 'post_numberは全角では保存できない' do
         @order_send_info.post_number = '１２３-４５６７'
         @order_send_info.valid?
         expect(@order_send_info.errors.full_messages).to include("Post number is invalid. Include hyphen(-)")

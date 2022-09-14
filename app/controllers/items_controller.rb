@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :repeat_code,only: [:show ,:edit , :update]
+  before_action :repeat_code,only: [:show ,:edit , :update,:destroy]
   before_action :authenticate_user!,only: [:new , :edit , :update ,:destroy]
   before_action :correct_signin_user, only: [:edit , :update , :destroy]
   before_action :already_pay, only: [:edit , :update , :destroy]
@@ -78,7 +78,7 @@ class ItemsController < ApplicationController
   end
 
   def already_pay
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id]) 復習用 引数repeat_coadであるから記載する必要なし
     redirect_to root_path if  @item.order.present?
     # 読み方  correct_signin_userユーザーの正誤は確かめられてる  かつ オーダーテーブルに存在するならredirect
   end
