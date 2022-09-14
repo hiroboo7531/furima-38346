@@ -74,6 +74,11 @@ RSpec.describe OrderSendInfo, type: :model do
         @order_send_info.valid?
         expect(@order_send_info.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it 'phoneは9桁の数字では保存できない' do
+        @order_send_info.phone = '090123456'
+        @order_send_info.valid?
+        expect(@order_send_info.errors.full_messages).to include('Phone is invalid')
+      end
       it 'phoneは12桁の数字では保存できない' do
         @order_send_info.phone = '090123456789'
         @order_send_info.valid?

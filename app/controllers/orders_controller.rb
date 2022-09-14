@@ -39,7 +39,10 @@ class OrdersController < ApplicationController
     end
     def already_pay_item
       @item = Item.find(params[:item_id])
-        redirect_to root_path if @item.order.present?
+        redirect_to root_path if @item.order.present? || current_user.id == @item.user.id
+        # 「商品が売却済みもしくはログイン者が出品者の場合トップページに遷移する」条件
+        # 復習用  ログイン者が出品者の場合トップページに遷移するの項目をつけないと出品者がURLを書いて購入フォームへ飛べる事態になる
+        # || current_user.id == @item.user.id
     end
 
     def pay_item
